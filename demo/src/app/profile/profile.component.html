@@ -11,8 +11,8 @@
                     style="width: 180px; border-radius: 10px;">
                 </div>
                 <div class="flex-grow-1 ms-3">
-                  <h5 class="mb-1">Danny McLoan</h5>
-                  <p class="mb-2 pb-1" style="color: #2b2a2a;">Senior Journalist</p>
+                  <h5 class="mb-1">{{userData?.['name']}}</h5>
+                  <p class="mb-2 pb-1" style="color: #2b2a2a;">{{userData?.['role']}}</p>
                   <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
                     style="background-color: #efefef;">
                     <div>
@@ -29,8 +29,21 @@
                     </div>
                   </div>
                   <div class="d-flex pt-1">
-                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1" (click)="logout()">Logout</button>
                     <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+
+                    <div *ngIf="accountStatus;else account">
+
+                      <button type="button" class="btn btn-danger ms-1 flex-grow-1">verified</button>
+                    </div>
+
+                    <ng-template #account>
+
+                      <button type="button" class="btn btn-success ms-1 flex-grow-1" (click)="verifyEmail()">verify</button>
+
+                    </ng-template>
+
+
                   </div>
                 </div>
               </div>

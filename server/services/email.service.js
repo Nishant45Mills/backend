@@ -1,35 +1,38 @@
-// const nodemailer = require('nodemailer');
-// const  {authTokenService}  = require('./index')
+const nodemailer = require('nodemailer');
 
-// const sendResetPasswordByMail = async (user) => {
-//     console.log("dksahdjk1");
+const sendMail = async (to, token, html, subject) => {
 
-//     const generateResetToken = await authTokenService.authToken(user);
-//     console.log("generateResetToken", generateResetToken);
+    const transporter = nodemailer.createTransport({
 
-//     const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
 
-//         host: 'smtp.ethereal.email',
-//         port: 587,
-//         auth: {
+            user: 'kyle.gaylord@ethereal.email',
+            pass: 'VqxQ7XrWZyK75AYQRM'
+        }
+    })
 
-//             user: 'kyle.gaylord@ethereal.email',
-//             pass: 'VqxQ7XrWZyK75AYQRM'
-//         }
-//     })
+    const options = {
 
-//     const options = {
+        from: '<admin@gmail.com>',
+        to: to,
+        subject: subject,
+        html: html
 
-//         from: '<admin@gmail.com>',
-//         to: user.email,
-//         subject: `forgot the password`,
-//         html: 'hii ' + user.name + ',please click this link for new password <a href="http://localhost:4200/auth/reset-password?token=' + generateResetToken + '">reset password</a>'
+    }
 
-//     }
-//     console.log("dksahdjk");
-//     const ss = await transporter.sendMail(options);
-//     console.log(ss);
+    return transporter.sendMail(options);
 
-// }
+}
 
-// module.exports = { sendResetPasswordByMail }
+const sendVerifyMail = async (to, token) => {
+
+    const htmlText = 'hii ,please click this link for verification <a href="http://localhost:4200/auth/verify-email?token=' + token + '">Verify the account</a>'
+    const subject = 'Account verification';
+
+    const mail = await sendMail(to, token, htmlText, subject);
+    return mail;
+}
+
+module.exports = { sendMail, sendVerifyMail };

@@ -19,7 +19,7 @@ const verifyToken = async (req, res, next) => {
 
         const userId = decode['_id'];
 
-        const user = await userModel.findById(userId).select('+password').populate('_org','companyName email')
+        const user = await userModel.findById(userId).select('+password').populate('_org', 'companyName email')
         req.user = user
 
         next();

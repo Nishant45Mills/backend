@@ -36,14 +36,14 @@ export class RegisterComponent {
 
     this.isValid = true;
     this.status = false
-    // this.service.post(`/auth/register`, formData).subscribe({
-    //   next: (data) => {
-    //     console.log(data);
+    this.service.post(`/auth/register`, formData).subscribe({
+      next: (data) => {
+        console.log(data);
 
-    //     this.tostr.success('Register successfully');
-    //     this.router.navigateByUrl('/auth/login');
-    //   }
-    // })
+        this.tostr.success('Register successfully');
+        this.router.navigateByUrl('/auth/login');
+      }
+    })
 
   }
 

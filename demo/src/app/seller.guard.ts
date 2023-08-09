@@ -15,8 +15,6 @@ export class SellerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
 
-    console.log(localStorage.getItem('sellerToken'));
-
     if (localStorage.getItem('sellerToken')) {
 
       return true;

@@ -1,5 +1,5 @@
 const catchAsync = require('../util/catchAsync');
-const { userService, authTokenService, authService } = require('../services');
+const { userService, authTokenService, authService, emailService } = require('../services');
 const userModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const { findUserWithEmail } = require('../services/user.service');
@@ -42,7 +42,7 @@ const login = catchAsync(async (req, res) => {
 
 const changePassword = catchAsync(async (req, res) => {
 
-    const user1 = await userModel.findOne({ email: req.user.email }).select('+password');
+    const user1 = await userService.findUserWithEmail(req.user.email);
     const status = await bcrypt.compare(req.body.old_password, user1.password)
 
     if (!status) {
@@ -79,8 +79,24 @@ const resetPassword = catchAsync(async (req, res) => {
 
 const verifyEmail = catchAsync(async (req, res) => {
 
-    res.send('in auth controleer')
+    const token = await authTokenService.authToken(req.user);
+    const to = req.user.email;
+
+    const mail = await emailService.sendVerifyMail(to, token);
+    res.json({ message: "check ethermail for email verification" })
+
 
 });
 
-module.exports = { register, login, changePassword, forgotPassword, resetPassword, verifyEmail }
+const verifyAccount = catchAsync(async (req, res) => {
+
+    const tokenStatus = await authTokenService.verfyToken(req.query.token);
+    const user = await userService.getUserById(tokenStatus._id);
+    user.isEmailVerfified = true;
+    await user.save();
+    res.json({ user });
+
+})
+
+
+module.exports = { register, login, changePassword, forgotPassword, resetPassword, verifyEmail, verifyAccount }

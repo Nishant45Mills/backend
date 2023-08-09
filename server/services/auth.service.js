@@ -18,7 +18,6 @@ const loginUserWithEmailAndPassword = async (email, password) => {
 
 const forgotPasswordService = async (email) => {
 
-  console.log(email);
   const user = await userService.findUserWithEmail(email);
 
   if (!user) {
@@ -29,41 +28,34 @@ const forgotPasswordService = async (email) => {
 
   const generateResetToken = await authTokenService.authToken(user);
 
-  const transporter = nodemailer.createTransport({
+  const htmlText = 'hii ' + user.name + ',please click this link for new password <a href="http://localhost:4200/auth/reset-password?token=' + generateResetToken + '">reset password</a>'
+  const subject = 'reset password';
 
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
+  try {
 
-      user: 'kyle.gaylord@ethereal.email',
-      pass: 'VqxQ7XrWZyK75AYQRM'
-    }
-  })
-
-  const options = {
-
-    from: '<admin@gmail.com>',
-    to: user.email,
-    subject: `forgot the password`,
-    html: 'hii ' + user.name + ',please click this link for new password <a href="http://localhost:4200/auth/reset-password?token=' + generateResetToken + '">reset password</a>'
+    const mail = await emailService.sendMail(user.email, generateResetToken, htmlText, subject);
+    console.log(mail);
 
   }
 
-   return transporter.sendMail(options);
+  catch (err) {
+
+    throw new ApiError('Mail did not send something goes wrong', 400);
+
+  }
+
 
 }
 
-const resetPasswordService = async (token,tokenType, newPassword) => {
-
-  console.log(tokenType);
+const resetPasswordService = async (token, tokenType, newPassword) => {
 
   if (tokenType == 'reset-password') {
 
     const tokenStatus = await authTokenService.verfyToken(token);
 
-   const user = await userModel.findById(tokenStatus._id).select('+password');
+    const user = await userModel.findById(tokenStatus._id).select('+password');
 
-   const password = await bcrypt.hash(newPassword,10);
+    const password = await bcrypt.hash(newPassword, 10);
 
     user.password = password;
 
@@ -74,5 +66,6 @@ const resetPasswordService = async (token,tokenType, newPassword) => {
   }
 
 }
+
 
 module.exports = { loginUserWithEmailAndPassword, forgotPasswordService, resetPasswordService }

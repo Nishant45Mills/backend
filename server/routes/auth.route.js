@@ -10,6 +10,7 @@ router.post('/login', [verifyCaptcha, authValidation.login], authController.logi
 router.post('/change-password', verifyToken, authController.changePassword);
 router.post('/forgot-password', authValidation.forgotpasswordData, authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
-router.post('/verify-email',authController.verifyEmail);
+router.post('/send-verification-email', verifyToken, authController.verifyEmail);
+router.post('/verify-email', authController.verifyAccount)
 
 module.exports = router;

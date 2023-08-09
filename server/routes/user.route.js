@@ -7,9 +7,10 @@ const app = express();
 router.use(verifyToken)
 
 router.post('/', userController.createUser);
-router.get('/:userId', userController.getUser);
 router.get('/', userController.getUsers);
+router.get('/profile', userController.profile)
 router.patch('/org', userController.updateOrg)
+router.get('/:userId', userController.getUser);
 router.patch('/:userId', userController.updateUserInfo);
 router.patch('/role/:userRoleId', userController.updateUserRole);
 router.delete('/:userId', userController.deleteUser);

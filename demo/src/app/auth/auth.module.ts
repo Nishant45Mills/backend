@@ -7,12 +7,14 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    VerifyEmailComponent
   ],
   imports: [
     CommonModule,

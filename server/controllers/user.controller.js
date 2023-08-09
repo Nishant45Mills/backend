@@ -64,4 +64,12 @@ const deleteUser = catchAsync(async (req, res) => {
     res.status(204).json({ result })
 });
 
-module.exports = { createUser, getUser, getUsers, updateUserInfo, updateUserRole, updateOrg, deleteUser }
+const profile = catchAsync(async (req, res) => {
+
+    const user = req.user;
+    user.password = undefined;
+    res.json({ user });
+
+})
+
+module.exports = { createUser, getUser, getUsers, updateUserInfo, updateUserRole, updateOrg, deleteUser, profile }

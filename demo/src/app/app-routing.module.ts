@@ -4,7 +4,7 @@ import { SellerGuard, SellerProfileGuard } from './seller.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'auth', canActivate: [SellerProfileGuard], loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'profile', canActivate: [SellerGuard], loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 ];
 
