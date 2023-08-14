@@ -26,15 +26,15 @@ export class LoginComponent {
 
     console.log(data);
 
-    // this.service.post(`/auth/login`, data).subscribe({
-    //   next: (data:any) => {
+    this.service.post(`/auth/login`, data).subscribe({
+      next: (data:any) => {
 
-    //     console.log(data);
+        console.log(data);
         
-    //     localStorage.setItem('sellerToken',data['userToken'])
-    //     this.route.navigateByUrl('profile');
-    //   }
-    // })
+        localStorage.setItem('sellerToken',data['userToken'])
+        this.route.navigateByUrl('profile');
+      }
+    })
 
   }
 

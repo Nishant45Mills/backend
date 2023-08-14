@@ -9,6 +9,7 @@ import { DataInterceptor } from './data.interceptor';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     HotToastModule.forRoot(),
     NgxCaptchaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDropzoneModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

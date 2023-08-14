@@ -1,0 +1,41 @@
+<button class="btn btn-primary mt-3 ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create product</button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form [formGroup]="productForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Create product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Product name:</label>
+                <input type="text" name="name" formControlName="name" class="ms-2"> <br>
+            </div>
+
+            <div class="mt-4">
+                <label>Description:</label>
+                <input type="text" name="description" formControlName="description" class="ms-2"><br>
+            </div>
+
+            <div class="mt-4">
+                <label>Upload image</label>
+                <input multiple type="file" name="files" (change)="checkFile($event)" class="ms-2"><br>
+            </div>
+            
+
+            <div class="mt-4">
+                <label>Price:</label>
+                <input type="number" name="price" formControlName="price" class="ms-2">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="sendProduct()" data-bs-dismiss="modal" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
