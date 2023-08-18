@@ -28,13 +28,12 @@ const forgotPasswordService = async (email) => {
 
   const generateResetToken = await authTokenService.authToken(user);
 
-  const htmlText = 'hii ' + user.name + ',please click this link for new password <a href="http://localhost:4200/auth/reset-password?token=' + generateResetToken + '">reset password</a>'
+  const htmlText = 'hii ' + user.name + ',please click this link for new password <a href="http://localhost:4200/seller/auth/reset-password?token=' + generateResetToken + '">reset password</a>'
   const subject = 'reset password';
 
   try {
 
     const mail = await emailService.sendMail(user.email, generateResetToken, htmlText, subject);
-    console.log(mail);
 
   }
 

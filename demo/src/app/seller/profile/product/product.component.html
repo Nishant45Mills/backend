@@ -1,0 +1,128 @@
+<button class="btn btn-primary mt-3 ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create product</button>
+<div class="container d-flex">
+
+    <div *ngFor="let data of productArray" class="m-3">
+
+      <div class="card mt-4" style="width: 18rem;">
+
+        <img src="http://localhost:5000/{{data['images'][0]}}" class="card-img-top" alt="steve" height="200px">
+
+        <div class="card-body">
+          <h5 class="card-title">{{data['name']}}</h5>
+          <p class="card-text">{{data['description']}}</p>
+          <p class="card-text text-danger fs-4">{{data['price']}}₹</p>
+
+          <div class="d-flex justify-content-between">
+
+            <div>
+              <a href="#" class="btn btn-primary">Buy</a>
+
+            </div>
+            <div>
+
+              <div class="dropdown" (click)="getPictureInfo(data['_id'])" data-toggle="tooltip" title="Options" data-bs-toggle="dropdown" aria-expanded="false">
+
+                <i class="fa fa-ellipsis-v ms-3 cursor-pointer" aria-hidden="true"></i>
+        
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal3">Edit Info</a></li>
+                  <li style="cursor: pointer;"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update image</a></li>
+                  <li><a class="dropdown-item" (click)="deleteProduct()">Delete</a></li>
+                </ul>
+      
+      
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="productForm" (ngSubmit)="updateData(productForm.value)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" formControlName="new_images" name="new_images" (change)="takeImageInfo($event)" multiple>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+        </form>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+    <form [formGroup]="productForm" (ngSubmit)="updateInfo(productForm.value)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <input type="text" name="name" placeholder="productName" formControlName="name">
+        <input type="text" name="description" placeholder="description" formControlName="description">
+        <input type="number" name="price" placeholder="price" formControlName="price">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+        </form>
+  </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form [formGroup]="productForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Create product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Product name:</label>
+                <input type="text" name="name" formControlName="name" class="ms-2"> <br>
+            </div>
+
+            <div class="mt-4">
+                <label>Description:</label>
+                <input type="text" name="description" formControlName="description" class="ms-2"><br>
+            </div>
+
+            <div class="mt-4">
+                <label>Upload image</label>
+                <input multiple type="file" name="files" (change)="checkFile($event)" class="ms-2"><br>
+            </div>
+            
+
+            <div class="mt-4">
+                <label>Price:</label>
+                <input type="number" name="price" formControlName="price" class="ms-2">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="sendProduct()" data-bs-dismiss="modal" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>

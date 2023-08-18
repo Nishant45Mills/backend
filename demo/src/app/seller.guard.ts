@@ -22,7 +22,7 @@ export class SellerGuard implements CanActivate {
 
     else {
 
-      this.router.navigateByUrl('/auth')
+      this.router.navigateByUrl('/seller/auth')
       return false;
 
     }
@@ -45,7 +45,7 @@ export class SellerProfileGuard implements CanActivate {
 
     if (localStorage.getItem('sellerToken')) {
 
-      this.router.navigateByUrl('profile');
+      this.router.navigateByUrl('/seller/profile');
       return false;
     }
 

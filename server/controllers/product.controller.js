@@ -15,6 +15,8 @@ const createProduct = catchAsync(async (req, res) => {
 
 const getAllProduct = catchAsync(async (req, res) => {
 
+    const filter = req.query;
+    req._org = req.user._org._id;
     const product = await productService.getAllProductService(req.user._org._id);
     res.json({ product })
 
@@ -29,9 +31,26 @@ const getProduct = catchAsync(async (req, res) => {
 
 const updateProduct = catchAsync(async (req, res) => {
 
-    console.log("update");
-    const product = await productService.updateProductService(req.params.productId,req.body);
+    const product = await productService.updateProductService(req.params.productId, req.body);
+    res.json({ product });
 
 })
 
-module.exports = { createProduct, getAllProduct, getProduct ,updateProduct}
+const deleteProduct = catchAsync(async (req, res) => {
+
+    const product = await productService.getProductService(req.params.productId);
+    const deletedProduct = await product.deleteOne();
+    res.json({ deleteProduct });
+
+})
+
+const updateImage = catchAsync(async (req, res) => {
+
+    const product = await productService.getProductService(req.params.productId);
+    product.images[0] = req.file.path;
+    const updatedProduct = await product.save();
+    res.json({ updatedProduct })
+
+});
+
+module.exports = { createProduct, getAllProduct, getProduct, updateProduct, deleteProduct, updateImage }

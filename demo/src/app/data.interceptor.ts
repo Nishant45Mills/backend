@@ -15,12 +15,15 @@ export class DataInterceptor implements HttpInterceptor {
   constructor(private tostr: HotToastService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${localStorage.getItem('sellerToken')}`
+      }
+    });
+
     return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
 
-      console.log("i am happy");
-      console.log(error);
-      
-      
       switch (error.error.code) {
 
         case 400: this.tostr.error(error.error.message);

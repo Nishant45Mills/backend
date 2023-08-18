@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="product">Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<section class="vh-100" style="background-color: #9de2ff;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-md-9 col-lg-7 col-xl-5">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <div class="d-flex text-black">
+                <div class="flex-shrink-0">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    alt="Generic placeholder image" class="img-fluid"
+                    style="width: 180px; border-radius: 10px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="mb-1">{{userData?.['name']}}</h5>
+                  <p class="mb-2 pb-1" style="color: #2b2a2a;">{{userData?.['role']}}</p>
+                  <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                    style="background-color: #efefef;">
+                    <div>
+                      <p class="small text-muted mb-1">Articles</p>
+                      <p class="mb-0">41</p>
+                    </div>
+                    <div class="px-3">
+                      <p class="small text-muted mb-1">Followers</p>
+                      <p class="mb-0">976</p>
+                    </div>
+                    <div>
+                      <p class="small text-muted mb-1">Rating</p>
+                      <p class="mb-0">8.5</p>
+                    </div>
+                  </div>
+                  <div class="d-flex pt-1">
+                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1" (click)="logout()">Logout</button>
+                    <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+
+                    <div *ngIf="accountStatus;else account">
+
+                      <button type="button" class="btn btn-danger ms-1 flex-grow-1">verified</button>
+                    </div>
+
+                    <ng-template #account>
+
+                      <button type="button" class="btn btn-success ms-1 flex-grow-1" (click)="verifyEmail()">verify</button>
+
+                    </ng-template>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

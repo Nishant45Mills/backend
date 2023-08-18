@@ -14,16 +14,15 @@ const getAllProductService = async (orgId) => {
 
 const getProductService = async (productId) => {
 
-    return await product.find({ _id: productId }).populate('_org', ['comapnyName', 'email']);
+    return await product.findById(productId).populate('_org', ['comapnyName', 'email']);
 
 }
 
 const updateProductService = async (productId, payload) => {
 
-    console.log("update2");
-    const product = await product.find({ _id: productId });
-    console.log("update3");
-    console.log(product);
+    const productData = await product.findById(productId);
+    Object.assign(productData, payload);
+    return await productData.save();
 
 }
 

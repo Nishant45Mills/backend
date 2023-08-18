@@ -12,18 +12,23 @@ export class HttpService {
 
   post(normalUrl: any, payload: any) {
 
-    const c = localStorage.getItem('sellerToken');
-    const headers = { 'Authorization': `Bearer ${c}` }
-
-    return this.http.post(`${this.baseUrl}${normalUrl}`, payload, { headers });
+    return this.http.post(`${this.baseUrl}${normalUrl}`, payload);
   }
 
   get(normalUrl: any) {
 
-    const c = localStorage.getItem('sellerToken');
-    const headers = { 'Authorization': `Bearer ${c}` }
+    return this.http.get(`${this.baseUrl}${normalUrl}`);
+  }
 
-    return this.http.get(`${this.baseUrl}${normalUrl}`, { headers });
+  patch(normalUrl: any, payload: any) {
+
+    return this.http.patch(`${this.baseUrl}${normalUrl}`, payload);
+
+  }
+
+  delete(normalUrl: any) {
+
+    return this.http.delete(`${this.baseUrl}${normalUrl}`);
   }
 
 }

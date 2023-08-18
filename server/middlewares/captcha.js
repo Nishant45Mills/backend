@@ -5,8 +5,6 @@ const secrateKey = '6LdPS2wnAAAAABI_pHFHr4Ru9549YTJQByFtlAfX'
 
 const verifyCaptcha = async (req, res, next) => {
 
-    console.log(typeof req.query.captcha);
-
     if (req.query.captcha !== 'false') {
 
         const captcha = req.body.captcha;

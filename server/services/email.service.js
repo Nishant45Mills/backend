@@ -28,7 +28,7 @@ const sendMail = async (to, token, html, subject) => {
 
 const sendVerifyMail = async (to, token) => {
 
-    const htmlText = 'hii ,please click this link for verification <a target=`_self` href="http://localhost:4200/auth/verify-email?token=' + token + '">Verify the account</a>'
+    const htmlText = 'hii ,please click this link for verification <a target=`_self` href="http://localhost:4200/seller/auth/verify-email?token=' + token + '">Verify the account</a>'
     const subject = 'Account verification';
 
     const mail = await sendMail(to, token, htmlText, subject);

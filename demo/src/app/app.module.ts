@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { DataInterceptor } from './data.interceptor';
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './seller/auth/reset-password/reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
@@ -28,7 +28,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     provide: HTTP_INTERCEPTORS,
     useClass: DataInterceptor,
     multi: true,
-}],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
